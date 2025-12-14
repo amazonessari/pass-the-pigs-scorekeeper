@@ -20,7 +20,7 @@ export const GameSetup = ({ onStart, onBack }: GameSetupProps) => {
   const [editingIndex, setEditingIndex] = useState<number | null>(null);
 
   const addPlayer = () => {
-    if (players.length < 8) {
+    if (players.length < 20) {
       setPlayers([...players, `Player ${players.length + 1}`]);
     }
   };
@@ -67,7 +67,7 @@ export const GameSetup = ({ onStart, onBack }: GameSetupProps) => {
         <div className="flex items-center gap-2 mb-4">
           <Users className="w-5 h-5 text-primary" />
           <h2 className="text-lg font-display text-foreground">Players</h2>
-          <span className="text-sm text-muted-foreground">({players.length}/8)</span>
+          <span className="text-sm text-muted-foreground">({players.length}/20)</span>
         </div>
 
         <div className="space-y-3">
@@ -114,7 +114,7 @@ export const GameSetup = ({ onStart, onBack }: GameSetupProps) => {
             ))}
           </AnimatePresence>
 
-          {players.length < 8 && (
+          {players.length < 20 && (
             <motion.div layout>
               <Button
                 variant="outline"

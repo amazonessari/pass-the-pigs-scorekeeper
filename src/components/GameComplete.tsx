@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
-import { Trophy, Home, RotateCcw, Share2 } from 'lucide-react';
+import { Home, RotateCcw } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Game, Player } from '@/types/game';
+import { Game } from '@/types/game';
 import { cn } from '@/lib/utils';
 
 interface GameCompleteProps {
@@ -13,22 +13,6 @@ interface GameCompleteProps {
 export const GameComplete = ({ game, onHome, onNewGame }: GameCompleteProps) => {
   const winner = game.players.find(p => p.id === game.winnerId);
   const sortedPlayers = [...game.players].sort((a, b) => b.totalScore - a.totalScore);
-
-  const handleShare = async () => {
-    const text = `🐷 Pass the Pigs Results!\n\n${sortedPlayers.map((p, i) => 
-      `${i === 0 ? '🏆' : `#${i + 1}`} ${p.name}: ${p.totalScore} pts`
-    ).join('\n')}\n\n${winner?.name} wins! 🎉`;
-
-    if (navigator.share) {
-      try {
-        await navigator.share({ text });
-      } catch (e) {
-        // User cancelled
-      }
-    } else {
-      navigator.clipboard.writeText(text);
-    }
-  };
 
   return (
     <div className="min-h-screen flex flex-col px-4 py-8 safe-top safe-bottom">
@@ -166,16 +150,10 @@ export const GameComplete = ({ game, onHome, onNewGame }: GameCompleteProps) => 
         transition={{ delay: 0.6 }}
         className="space-y-3 mt-8"
       >
-        <div className="grid grid-cols-2 gap-3">
-          <Button variant="outline" size="lg" onClick={handleShare}>
-            <Share2 className="w-5 h-5 mr-2" />
-            Share
-          </Button>
-          <Button variant="success" size="lg" onClick={onNewGame}>
-            <RotateCcw className="w-5 h-5 mr-2" />
-            Play Again
-          </Button>
-        </div>
+        <Button variant="success" size="lg" className="w-full" onClick={onNewGame}>
+          <RotateCcw className="w-5 h-5 mr-2" />
+          Play Again
+        </Button>
         <Button variant="ghost" size="lg" className="w-full" onClick={onHome}>
           <Home className="w-5 h-5 mr-2" />
           Home
