@@ -241,21 +241,45 @@ export const useGame = () => {
         description: `${player.name} banked ${turnPoints} points (Total: ${player.totalScore})`,
       };
 
-      // Check for winner
-      if (player.totalScore >= prev.targetScore) {
+      // Check if target reached and if this completes a full round
+      const nextPlayerIndex = (playerIndex + 1) % prev.players.length;
+      const isRoundComplete = nextPlayerIndex === 0; // Back to first player means round complete
+      
+      if (player.totalScore >= prev.targetScore && isRoundComplete) {
+        // All players have had equal turns, find the winner (highest score)
+        const highestScore = Math.max(...newPlayers.map(p => p.totalScore));
+        const winnerId = newPlayers.find(p => p.totalScore === highestScore)?.id || player.id;
+        
         return {
           ...prev,
           players: newPlayers,
           currentTurn: null,
           status: 'complete',
-          winnerId: player.id,
+          winnerId,
+          history: [...prev.history, historyEntry],
+          updatedAt: Date.now(),
+        };
+      }
+      
+      // Check if any player reached target - continue until round completes
+      const anyReachedTarget = newPlayers.some(p => p.totalScore >= prev.targetScore);
+      if (anyReachedTarget && isRoundComplete) {
+        // Round complete and someone reached target - find winner
+        const highestScore = Math.max(...newPlayers.map(p => p.totalScore));
+        const winnerId = newPlayers.find(p => p.totalScore === highestScore)?.id || player.id;
+        
+        return {
+          ...prev,
+          players: newPlayers,
+          currentTurn: null,
+          status: 'complete',
+          winnerId,
           history: [...prev.history, historyEntry],
           updatedAt: Date.now(),
         };
       }
 
       // Move to next player
-      const nextPlayerIndex = (playerIndex + 1) % prev.players.length;
       
       return {
         ...prev,
