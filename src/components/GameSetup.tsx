@@ -11,7 +11,7 @@ interface GameSetupProps {
   onBack: () => void;
 }
 
-const DEFAULT_PLAYERS = ['Player 1', 'Player 2'];
+const DEFAULT_PLAYERS = ['', ''];
 const TARGET_SCORES = [50, 100, 150, 200];
 
 export const GameSetup = ({ onStart, onBack }: GameSetupProps) => {
@@ -21,7 +21,7 @@ export const GameSetup = ({ onStart, onBack }: GameSetupProps) => {
 
   const addPlayer = () => {
     if (players.length < 20) {
-      setPlayers([...players, `Player ${players.length + 1}`]);
+      setPlayers([...players, '']);
     }
   };
 
@@ -96,7 +96,7 @@ export const GameSetup = ({ onStart, onBack }: GameSetupProps) => {
                     onChange={(e) => updatePlayerName(index, e.target.value)}
                     onFocus={() => setEditingIndex(index)}
                     onBlur={() => setEditingIndex(null)}
-                    placeholder={`Player ${index + 1}`}
+                    placeholder="Player name"
                     className="flex-1 border-0 bg-transparent text-lg font-semibold p-0 h-auto focus-visible:ring-0"
                   />
                   {players.length > 2 && (
