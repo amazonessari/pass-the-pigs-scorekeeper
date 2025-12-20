@@ -4,9 +4,10 @@ import { HomeScreen } from '@/components/HomeScreen';
 import { GameSetup } from '@/components/GameSetup';
 import { GameScreen } from '@/components/GameScreen';
 import { GameComplete } from '@/components/GameComplete';
+import { LeaderboardPage } from '@/pages/LeaderboardPage';
 import { useGame } from '@/hooks/useGame';
 
-type Screen = 'home' | 'setup' | 'game' | 'complete';
+type Screen = 'home' | 'setup' | 'game' | 'complete' | 'leaderboard';
 
 const Index = () => {
   const {
@@ -61,6 +62,14 @@ const Index = () => {
     if (game?.status === 'active') {
       setScreen('game');
     }
+  };
+
+  const handleLeaderboard = () => {
+    setScreen('leaderboard');
+  };
+
+  const handleBackFromLeaderboard = () => {
+    setScreen('game');
   };
 
   const handlePlayAgain = () => {
@@ -120,6 +129,21 @@ const Index = () => {
               onBank={bankPoints}
               onUndo={undo}
               onHome={handleHome}
+              onLeaderboard={handleLeaderboard}
+            />
+          </motion.div>
+        )}
+
+        {screen === 'leaderboard' && game && (
+          <motion.div
+            key="leaderboard"
+            initial={{ opacity: 0, x: 50 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -50 }}
+          >
+            <LeaderboardPage
+              game={game}
+              onBack={handleBackFromLeaderboard}
             />
           </motion.div>
         )}
