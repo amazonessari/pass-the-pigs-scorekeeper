@@ -7,8 +7,8 @@
 @layer base {
   :root {
     /* Warm, playful pig-themed palette */
-    --background: 30 50% 97%;
-    --foreground: 20 30% 15%;
+    --background: 240 9% 98%;
+    --foreground: 240 9% 44%;
 
     --card: 30 40% 99%;
     --card-foreground: 20 30% 15%;
@@ -17,20 +17,20 @@
     --popover-foreground: 20 30% 15%;
 
     /* Coral pink primary */
-    --primary: 10 70% 65%;
-    --primary-foreground: 30 50% 98%;
+    --primary: 54 100% 50%;
+    --primary-foreground: 240 10% 20%;
 
     /* Warm cream secondary */
     --secondary: 35 40% 92%;
-    --secondary-foreground: 20 30% 25%;
+    --secondary-foreground: 240 9% 44%;
 
     /* Soft muted tones */
     --muted: 30 25% 90%;
     --muted-foreground: 20 15% 45%;
 
     /* Amber accent */
-    --accent: 35 85% 55%;
-    --accent-foreground: 30 50% 98%;
+    --accent: 206 81% 50%;
+    --accent-foreground: 206 87% 30%;
 
     /* Success green for banking */
     --success: 145 60% 42%;
@@ -74,6 +74,7 @@
     --sidebar-accent-foreground: 240 5.9% 10%;
     --sidebar-border: 220 13% 91%;
     --sidebar-ring: 217.2 91.2% 59.8%;
+    --font-sans: "Open Sans", ui-sans-serif, system-ui, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
   }
 
   .dark {
@@ -132,6 +133,7 @@
     --sidebar-accent-foreground: 240 4.8% 95.9%;
     --sidebar-border: 240 3.7% 15.9%;
     --sidebar-ring: 217.2 91.2% 59.8%;
+    --font-sans: "Open Sans", ui-sans-serif, system-ui, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
   }
 }
 
