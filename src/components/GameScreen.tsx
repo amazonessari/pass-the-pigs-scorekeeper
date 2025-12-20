@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Home, History, X } from 'lucide-react';
+import { Home, History, Trophy, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Leaderboard } from '@/components/Leaderboard';
 import { OutcomeGrid } from '@/components/OutcomeGrid';
 import { TurnTray } from '@/components/TurnTray';
 import { Game, OutcomeType, OUTCOMES } from '@/types/game';
 import { cn } from '@/lib/utils';
+
 interface GameScreenProps {
   game: Game;
   canUndo: boolean;
@@ -14,23 +14,27 @@ interface GameScreenProps {
   onBank: () => void;
   onUndo: () => void;
   onHome: () => void;
+  onLeaderboard: () => void;
 }
+
 export const GameScreen = ({
   game,
   canUndo,
   onRecordOutcome,
   onBank,
   onUndo,
-  onHome
+  onHome,
+  onLeaderboard
 }: GameScreenProps) => {
   const [showHistory, setShowHistory] = useState(false);
   const currentPlayer = game.players[game.currentPlayerIndex];
   const turnPoints = game.currentTurn?.turnPoints || 0;
+
   return <div className="min-h-screen flex flex-col pb-28">
       {/* Header */}
       <div className="sticky top-0 z-10 bg-background/95 backdrop-blur-lg border-b border-border safe-top">
         <div className="container max-w-lg mx-auto px-4 py-3">
-          <div className="flex items-center justify-between mb-3">
+          <div className="flex items-center justify-between">
             <Button variant="ghost" size="icon" onClick={onHome}>
               <Home className="w-5 h-5" />
             </Button>
@@ -39,12 +43,15 @@ export const GameScreen = ({
                 First to {game.targetScore}
               </div>
             </div>
-            <Button variant="ghost" size="icon" onClick={() => setShowHistory(true)}>
-              <History className="w-5 h-5" />
-            </Button>
+            <div className="flex gap-1">
+              <Button variant="ghost" size="icon" onClick={onLeaderboard}>
+                <Trophy className="w-5 h-5" />
+              </Button>
+              <Button variant="ghost" size="icon" onClick={() => setShowHistory(true)}>
+                <History className="w-5 h-5" />
+              </Button>
+            </div>
           </div>
-          
-          <Leaderboard players={game.players} currentPlayerId={currentPlayer.id} targetScore={game.targetScore} />
         </div>
       </div>
 
