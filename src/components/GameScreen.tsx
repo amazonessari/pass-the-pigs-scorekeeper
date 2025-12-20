@@ -29,6 +29,15 @@ export const GameScreen = ({
   const [showHistory, setShowHistory] = useState(false);
   const currentPlayer = game.players[game.currentPlayerIndex];
   const turnPoints = game.currentTurn?.turnPoints || 0;
+  
+  // Calculate current turn number (completed turns + 1 for current)
+  const currentTurnNumber = currentPlayer.turns.length + 1;
+  
+  const getOrdinal = (n: number) => {
+    const s = ['th', 'st', 'nd', 'rd'];
+    const v = n % 100;
+    return n + (s[(v - 20) % 10] || s[v] || s[0]);
+  };
 
   return <div className="min-h-screen flex flex-col pb-28">
       {/* Header */}
@@ -65,7 +74,7 @@ export const GameScreen = ({
     }} className="container max-w-lg mx-auto px-4 py-4">
         <div className="p-4 border-border text-center bg-[#fdfcfc]/0 rounded-none shadow-none border-0">
           <div className="text-sm text-muted-foreground mb-1">
-            Current Turn
+            {getOrdinal(currentTurnNumber)} turn
           </div>
           <div className="text-2xl font-display text-foreground">
             {currentPlayer.name}'s Roll
