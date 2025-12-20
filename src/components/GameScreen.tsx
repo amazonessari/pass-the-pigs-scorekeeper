@@ -6,7 +6,6 @@ import { OutcomeGrid } from '@/components/OutcomeGrid';
 import { TurnTray } from '@/components/TurnTray';
 import { Game, OutcomeType, OUTCOMES } from '@/types/game';
 import { cn } from '@/lib/utils';
-
 interface GameScreenProps {
   game: Game;
   canUndo: boolean;
@@ -16,7 +15,6 @@ interface GameScreenProps {
   onHome: () => void;
   onLeaderboard: () => void;
 }
-
 export const GameScreen = ({
   game,
   canUndo,
@@ -29,17 +27,15 @@ export const GameScreen = ({
   const [showHistory, setShowHistory] = useState(false);
   const currentPlayer = game.players[game.currentPlayerIndex];
   const turnPoints = game.currentTurn?.turnPoints || 0;
-  
+
   // Calculate current turn number (completed turns + 1 for current)
   const currentTurnNumber = currentPlayer.turns.length + 1;
-  
   const getOrdinal = (n: number) => {
     const s = ['th', 'st', 'nd', 'rd'];
     const v = n % 100;
     return n + (s[(v - 20) % 10] || s[v] || s[0]);
   };
-
-  return <div className="min-h-screen flex flex-col pb-28">
+  return <div className="min-h-screen flex flex-col pb-28 bg-background">
       {/* Header */}
       <div className="sticky top-0 z-10 bg-background/95 backdrop-blur-lg border-b border-border safe-top">
         <div className="container max-w-lg mx-auto px-4 py-3">
@@ -48,7 +44,7 @@ export const GameScreen = ({
               <Home className="w-5 h-5" />
             </Button>
             <div className="text-center">
-              <div className="text-sm text-muted-foreground">
+              <div className="text-sm text-secondary-foreground">
                 First to {game.targetScore}
               </div>
             </div>
@@ -73,10 +69,10 @@ export const GameScreen = ({
       y: 0
     }} className="container max-w-lg mx-auto px-4 py-4">
         <div className="p-4 border-border text-center bg-[#fdfcfc]/0 rounded-none shadow-none border-0">
-          <div className="text-sm text-muted-foreground mb-1">
+          <div className="text-sm mb-1 text-secondary-foreground">
             {getOrdinal(currentTurnNumber)} turn
           </div>
-          <div className="text-2xl font-display text-foreground">
+          <div className="text-2xl font-display text-primary-foreground">
             {currentPlayer.name}'s Roll
           </div>
           {game.currentTurn && game.currentTurn.events.length > 0 && <div className="flex flex-wrap justify-center gap-2 mt-3">
