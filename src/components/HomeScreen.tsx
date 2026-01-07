@@ -53,7 +53,7 @@ export const HomeScreen = ({
       }} className="inline-block mb-4">
           <PigIcon size="xl" animate />
         </motion.div>
-        <h1 className="text-4xl font-display mb-2 text-primary-foreground">
+        <h1 className="text-4xl font-display mb-2 text-primary">
           Pass the Pigs
         </h1>
         <p className="text-lg text-secondary-foreground">
