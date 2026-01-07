@@ -72,7 +72,7 @@ export const GameScreen = ({
           <div className="text-sm mb-1 text-secondary-foreground">
             {getOrdinal(currentTurnNumber)} turn
           </div>
-          <div className="text-2xl font-display text-primary-foreground">
+          <div className="text-2xl font-display text-primary">
             {currentPlayer.name}'s Roll
           </div>
           {game.currentTurn && game.currentTurn.events.length > 0 && <div className="flex flex-wrap justify-center gap-2 mt-3">
