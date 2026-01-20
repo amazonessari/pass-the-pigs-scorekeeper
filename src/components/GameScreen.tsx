@@ -92,13 +92,19 @@ export const GameScreen = ({
             {currentPlayer.name}'s Roll
           </div>
           {game.currentTurn && game.currentTurn.events.length > 0 && <div className="flex flex-wrap justify-center gap-2 mt-3">
-              {game.currentTurn.events.map((event, index) => <motion.div key={event.id} initial={{
-            scale: 0
-          }} animate={{
-            scale: 1
-          }} className={cn("px-3 py-1 rounded-full text-sm font-medium", "bg-primary/10 text-primary")}>
-                  +{event.points}
-                </motion.div>)}
+              {game.currentTurn.events.map((event, index) => {
+                // Calculate running total up to this point
+                const runningTotal = game.currentTurn!.events.slice(0, index + 1).reduce((sum, e) => sum + e.points, 0);
+                return (
+                  <motion.div key={event.id} initial={{
+                    scale: 0
+                  }} animate={{
+                    scale: 1
+                  }} className={cn("px-3 py-1 rounded-full text-sm font-medium", "bg-primary/10 text-primary")}>
+                    +{event.points} <span className="text-muted-foreground">({runningTotal})</span>
+                  </motion.div>
+                );
+              })}
             </div>}
         </div>
       </motion.div>
@@ -109,7 +115,7 @@ export const GameScreen = ({
       </div>
 
       {/* Turn tray */}
-      <TurnTray turnPoints={turnPoints} canBank={turnPoints > 0} canUndo={canUndo} onBank={onBank} onUndo={onUndo} />
+      <TurnTray totalScore={currentPlayer.totalScore} canBank={turnPoints > 0} canUndo={canUndo} onBank={onBank} onUndo={onUndo} />
 
       {/* History drawer */}
       <AnimatePresence>
