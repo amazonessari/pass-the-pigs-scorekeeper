@@ -115,7 +115,7 @@ export const GameScreen = ({
       </div>
 
       {/* Turn tray */}
-      <TurnTray totalScore={currentPlayer.totalScore} canBank={turnPoints > 0} canUndo={canUndo} onBank={onBank} onUndo={onUndo} />
+      <TurnTray totalScore={currentPlayer.totalScore + turnPoints} canBank={turnPoints > 0} canUndo={canUndo} onBank={onBank} onUndo={onUndo} />
 
       {/* History drawer */}
       <AnimatePresence>
