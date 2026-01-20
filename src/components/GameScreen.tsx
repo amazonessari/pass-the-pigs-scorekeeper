@@ -31,13 +31,16 @@ export const GameScreen = ({
   const [showTurnLeaderboard, setShowTurnLeaderboard] = useState(false);
   const prevPlayerIndexRef = useRef(game.currentPlayerIndex);
 
-  // Show leaderboard when turn ends (player changes)
+  // Show leaderboard when last player's turn ends (wraps back to player 0)
   useEffect(() => {
     if (prevPlayerIndexRef.current !== game.currentPlayerIndex) {
-      setShowTurnLeaderboard(true);
+      // Show leaderboard only when we wrap back to player 0 (end of round)
+      if (game.currentPlayerIndex === 0 && prevPlayerIndexRef.current === game.players.length - 1) {
+        setShowTurnLeaderboard(true);
+      }
       prevPlayerIndexRef.current = game.currentPlayerIndex;
     }
-  }, [game.currentPlayerIndex]);
+  }, [game.currentPlayerIndex, game.players.length]);
   const currentPlayer = game.players[game.currentPlayerIndex];
   const turnPoints = game.currentTurn?.turnPoints || 0;
 
