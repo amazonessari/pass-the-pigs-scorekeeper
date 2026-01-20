@@ -81,7 +81,7 @@ export const GameScreen = ({
           }} animate={{
             scale: 1
           }} className={cn("px-3 py-1 rounded-full text-sm font-medium", "bg-primary/10 text-primary")}>
-                  {OUTCOMES[event.outcome].emoji} +{event.points}
+                  +{event.points}
                 </motion.div>)}
             </div>}
         </div>
