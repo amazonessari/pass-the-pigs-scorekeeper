@@ -33,7 +33,7 @@ interface OutcomeGridProps {
 export const OutcomeGrid = ({
   onSelect
 }: OutcomeGridProps) => {
-  return <div className="space-y-4">
+  return <div className="space-y-4 pb-[16px]">
       {/* Single outcomes */}
       <div>
         <div className="text-sm font-display mb-2 px-1 text-secondary-foreground">
