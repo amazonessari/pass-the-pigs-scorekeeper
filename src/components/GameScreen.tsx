@@ -1,11 +1,13 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Home, History, Trophy, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { OutcomeGrid } from '@/components/OutcomeGrid';
 import { TurnTray } from '@/components/TurnTray';
+import { Leaderboard } from '@/components/Leaderboard';
 import { Game, OutcomeType, OUTCOMES } from '@/types/game';
 import { cn } from '@/lib/utils';
+
 interface GameScreenProps {
   game: Game;
   canUndo: boolean;
@@ -15,6 +17,7 @@ interface GameScreenProps {
   onHome: () => void;
   onLeaderboard: () => void;
 }
+
 export const GameScreen = ({
   game,
   canUndo,
@@ -25,6 +28,16 @@ export const GameScreen = ({
   onLeaderboard
 }: GameScreenProps) => {
   const [showHistory, setShowHistory] = useState(false);
+  const [showTurnLeaderboard, setShowTurnLeaderboard] = useState(false);
+  const prevPlayerIndexRef = useRef(game.currentPlayerIndex);
+
+  // Show leaderboard when turn ends (player changes)
+  useEffect(() => {
+    if (prevPlayerIndexRef.current !== game.currentPlayerIndex) {
+      setShowTurnLeaderboard(true);
+      prevPlayerIndexRef.current = game.currentPlayerIndex;
+    }
+  }, [game.currentPlayerIndex]);
   const currentPlayer = game.players[game.currentPlayerIndex];
   const turnPoints = game.currentTurn?.turnPoints || 0;
 
@@ -135,6 +148,51 @@ export const GameScreen = ({
               </div>
             </motion.div>
           </>}
+      </AnimatePresence>
+
+      {/* Turn End Leaderboard Modal */}
+      <AnimatePresence>
+        {showTurnLeaderboard && (
+          <>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 bg-foreground/40 backdrop-blur-sm z-50"
+              onClick={() => setShowTurnLeaderboard(false)}
+            />
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.9 }}
+              className="fixed inset-x-4 top-1/2 -translate-y-1/2 z-50 max-w-lg mx-auto"
+            >
+              <div className="bg-card rounded-2xl shadow-lifted p-6">
+                <div className="flex items-center justify-between mb-4">
+                  <h2 className="text-lg font-display">Standings</h2>
+                  <Button
+                    variant="ghost"
+                    size="icon-sm"
+                    onClick={() => setShowTurnLeaderboard(false)}
+                  >
+                    <X className="w-5 h-5" />
+                  </Button>
+                </div>
+                <Leaderboard
+                  players={game.players}
+                  currentPlayerId={game.players[game.currentPlayerIndex].id}
+                  targetScore={game.targetScore}
+                />
+                <Button
+                  className="w-full mt-4"
+                  onClick={() => setShowTurnLeaderboard(false)}
+                >
+                  Continue
+                </Button>
+              </div>
+            </motion.div>
+          </>
+        )}
       </AnimatePresence>
     </div>;
 };
