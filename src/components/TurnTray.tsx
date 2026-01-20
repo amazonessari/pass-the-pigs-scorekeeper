@@ -3,14 +3,14 @@ import { Undo2, PiggyBank } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 interface TurnTrayProps {
-  turnPoints: number;
+  totalScore: number;
   canBank: boolean;
   canUndo: boolean;
   onBank: () => void;
   onUndo: () => void;
 }
 export const TurnTray = ({
-  turnPoints,
+  totalScore,
   canBank,
   canUndo,
   onBank,
@@ -28,17 +28,17 @@ export const TurnTray = ({
             <Undo2 className="w-6 h-6" />
           </Button>
 
-          {/* Turn points display */}
+          {/* Total score display */}
           <div className="flex-1 text-center">
             <div className="text-sm font-medium text-secondary-foreground">
-              Turn Points
+              Total Score
             </div>
-            <motion.div key={turnPoints} initial={{
+            <motion.div key={totalScore} initial={{
             scale: 1.2
           }} animate={{
             scale: 1
-          }} className={cn("text-4xl font-display", turnPoints > 0 ? "text-primary" : "text-muted-foreground")}>
-              {turnPoints}
+          }} className={cn("text-4xl font-display", totalScore > 0 ? "text-primary" : "text-muted-foreground")}>
+              {totalScore}
             </motion.div>
           </div>
 
