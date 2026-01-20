@@ -78,7 +78,7 @@ export const OutcomeGrid = ({
           }} transition={{
             delay: 0.25 + index * 0.05
           }}>
-                <Button variant="game-double" size="game-sm" onClick={() => onSelect(type)} className="flex flex-col items-center justify-center gap-1 h-24">
+                <Button variant="game" size="game-sm" onClick={() => onSelect(type)} className="flex flex-col items-center justify-center gap-1 h-24">
                   <img src={OUTCOME_IMAGES[type]} alt={outcome.label} className="w-12 h-12 object-contain" />
                   <span className="text-xs font-semibold text-primary">{outcome.label}</span>
                   <span className="text-xs font-display text-muted-foreground">+{outcome.points}</span>
@@ -105,7 +105,7 @@ export const OutcomeGrid = ({
           }} transition={{
             delay: 0.45 + index * 0.05
           }}>
-                <Button variant="game-penalty" size="game-sm" onClick={() => onSelect(type)} className="flex flex-col items-center justify-center gap-1 h-24">
+                <Button variant="game" size="game-sm" onClick={() => onSelect(type)} className="flex flex-col items-center justify-center gap-1 h-24">
                   <img src={OUTCOME_IMAGES[type]} alt={outcome.label} className="w-12 h-12 object-contain" />
                   <span className="text-xs font-semibold">{outcome.label}</span>
                   <span className="text-xs text-destructive">
