@@ -60,8 +60,8 @@ export const GameScreen = ({
               <Home className="w-5 h-5" />
             </Button>
             <div className="absolute left-1/2 -translate-x-1/2">
-              <div className="text-sm text-secondary-foreground">
-                First to {game.targetScore}
+              <div className="text-sm font-display text-foreground">
+                {currentPlayer.name}'s {getOrdinal(currentTurnNumber)} turn
               </div>
             </div>
             <div className="flex gap-1">
@@ -85,13 +85,7 @@ export const GameScreen = ({
       y: 0
     }} className="container max-w-lg mx-auto px-4 py-4">
         <div className="p-4 border-border text-center bg-[#fdfcfc]/0 rounded-none shadow-none border-0">
-          <div className="text-sm mb-1 text-secondary-foreground">
-            {getOrdinal(currentTurnNumber)} turn
-          </div>
-          <div className="text-2xl font-display text-primary">
-            {currentPlayer.name}'s Roll
-          </div>
-          {game.currentTurn && game.currentTurn.events.length > 0 && <div className="flex flex-wrap justify-center gap-2 mt-3">
+          {game.currentTurn && game.currentTurn.events.length > 0 && <div className="flex flex-wrap justify-center gap-2">
               {game.currentTurn.events.map((event, index) => {
                 // Calculate running total up to this point
                 const runningTotal = game.currentTurn!.events.slice(0, index + 1).reduce((sum, e) => sum + e.points, 0);
