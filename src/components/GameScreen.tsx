@@ -31,10 +31,10 @@ export const GameScreen = ({
   const [showTurnLeaderboard, setShowTurnLeaderboard] = useState(false);
   const prevPlayerIndexRef = useRef(game.currentPlayerIndex);
 
-  // Show leaderboard when last player's turn ends (wraps back to player 0)
+  // Show leaderboard when last player's turn ends (wraps back to player 0) and scroll to top
   useEffect(() => {
     if (prevPlayerIndexRef.current !== game.currentPlayerIndex) {
-      // Show leaderboard only when we wrap back to player 0 (end of round)
+      window.scrollTo({ top: 0, behavior: 'smooth' });
       if (game.currentPlayerIndex === 0 && prevPlayerIndexRef.current === game.players.length - 1) {
         setShowTurnLeaderboard(true);
       }
