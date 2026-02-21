@@ -189,7 +189,7 @@ export const GameScreen = ({
                 </div>
                 <Leaderboard
                   players={game.players}
-                  currentPlayerId={game.players[game.currentPlayerIndex].id}
+                  currentPlayerId=""
                   targetScore={game.targetScore}
                 />
                 <Button
