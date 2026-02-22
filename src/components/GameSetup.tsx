@@ -135,7 +135,7 @@ export const GameSetup = ({ onStart, onBack }: GameSetupProps) => {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2 }}
-        className="mb-auto"
+        className="mb-8"
       >
         <div className="flex items-center gap-2 mb-4">
           <Target className="w-5 h-5 text-primary" />
