@@ -66,7 +66,7 @@ export const GameScreen = ({
               <div className="text-sm font-display text-muted-foreground leading-tight">
                 {getOrdinal(currentTurnNumber)} turn
               </div>
-              <div className="text-sm font-display text-primary leading-tight">
+              <div className="font-display text-primary leading-tight" style={{ fontSize: 18 }}>
                 {currentPlayer.name}
               </div>
             </div>
