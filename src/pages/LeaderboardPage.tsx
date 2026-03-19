@@ -14,7 +14,7 @@ export const LeaderboardPage = ({ game, onBack }: LeaderboardPageProps) => {
   const currentPlayer = game.players[game.currentPlayerIndex];
 
   return (
-    <div className="min-h-screen bg-background safe-top safe-bottom">
+    <div className="min-h-screen safe-top safe-bottom" style={{ background: 'var(--gradient-warm)' }}>
       {/* Header */}
       <div className="sticky top-0 z-10 bg-background/95 backdrop-blur-lg border-b border-border">
         <div className="container max-w-lg mx-auto px-4 py-3">

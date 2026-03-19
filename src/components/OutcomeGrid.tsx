@@ -37,9 +37,9 @@ export const OutcomeGrid = ({
       {/* Single outcomes */}
       <div>
         <div className="text-sm font-display mb-2 px-1 text-secondary-foreground">
-          Single Pig
+          Single Pig 🐖
         </div>
-        <div className="grid grid-cols-3 gap-2">
+        <div className="grid grid-cols-2 gap-2">
           {SINGLE_OUTCOMES.map((type, index) => {
           const outcome = OUTCOMES[type];
           return <motion.div key={type} initial={{
@@ -51,10 +51,10 @@ export const OutcomeGrid = ({
           }} transition={{
             delay: index * 0.05
           }}>
-                <Button variant="game" size="game-sm" onClick={() => onSelect(type)} className="flex flex-col items-center justify-center gap-1 h-24">
-                  <img src={OUTCOME_IMAGES[type]} alt={outcome.label} className="w-12 h-12 object-contain" />
-                  <span className="text-xs font-semibold">{outcome.label}</span>
-                  <span className="text-xs text-muted-foreground">+{outcome.points}</span>
+                <Button variant="game" size="game-sm" onClick={() => onSelect(type)} className="flex flex-col items-center justify-center gap-1 h-auto w-full px-0 py-2">
+                  <img src={OUTCOME_IMAGES[type]} alt={outcome.label} className="w-40 h-40 object-contain" />
+                  <span className="text-[10px] font-semibold leading-tight text-center">{outcome.description}</span>
+                  <span className="text-[14px] text-muted-foreground">+{outcome.points}</span>
                 </Button>
               </motion.div>;
         })}
@@ -64,7 +64,7 @@ export const OutcomeGrid = ({
       {/* Double outcomes */}
       <div>
         <div className="text-sm font-display mb-2 px-1 text-secondary-foreground">
-          Doubles ⭐
+          Doubles 🐖🐖
         </div>
         <div className="grid grid-cols-2 gap-2">
           {DOUBLE_OUTCOMES.map((type, index) => {
@@ -78,10 +78,10 @@ export const OutcomeGrid = ({
           }} transition={{
             delay: 0.25 + index * 0.05
           }}>
-                <Button variant="game" size="game-sm" onClick={() => onSelect(type)} className="flex flex-col items-center justify-center gap-1 h-24">
-                  <img src={OUTCOME_IMAGES[type]} alt={outcome.label} className="w-12 h-12 object-contain" />
-                  <span className="text-xs font-semibold text-primary">{outcome.label}</span>
-                  <span className="text-xs font-display text-muted-foreground">+{outcome.points}</span>
+                <Button variant="game" size="game-sm" onClick={() => onSelect(type)} className="flex flex-col items-center justify-center gap-1 h-auto w-full px-0 py-2">
+                  <img src={OUTCOME_IMAGES[type]} alt={outcome.label} className="w-40 h-40 object-contain" />
+                  <span className="text-[10px] font-semibold leading-tight text-center text-primary">{outcome.description}</span>
+                  <span className="text-[14px] font-display text-muted-foreground">+{outcome.points}</span>
                 </Button>
               </motion.div>;
         })}
@@ -105,9 +105,9 @@ export const OutcomeGrid = ({
           }} transition={{
             delay: 0.45 + index * 0.05
           }}>
-                <Button variant="game" size="game-sm" onClick={() => onSelect(type)} className="flex flex-col items-center justify-center gap-1 h-24">
-                  <img src={OUTCOME_IMAGES[type]} alt={outcome.label} className="w-12 h-12 object-contain" />
-                  <span className="text-xs font-semibold">{outcome.label}</span>
+                <Button variant="game" size="game-sm" onClick={() => onSelect(type)} className="flex flex-col items-center justify-center gap-1 h-auto w-full px-0 py-2">
+                  <img src={OUTCOME_IMAGES[type]} alt={outcome.label} className="w-40 h-40 object-contain" />
+                  <span className="text-[10px] font-semibold leading-tight text-center">{outcome.description}</span>
                   <span className="text-xs text-destructive">
                     {type === 'pig-out' ? 'Lose turn' : 'Lose all!'}
                   </span>

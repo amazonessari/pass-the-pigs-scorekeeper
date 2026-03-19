@@ -51,9 +51,12 @@ export const GameScreen = ({
     const v = n % 100;
     return n + (s[(v - 20) % 10] || s[v] || s[0]);
   };
-  return <div className="min-h-screen flex flex-col pb-28 bg-background">
+  return <div className="min-h-screen flex flex-col pb-28" style={{ background: 'var(--gradient-warm)' }}>
       {/* Header */}
-      <div className="sticky top-0 z-10 bg-background/95 backdrop-blur-lg border-b border-border safe-top">
+      <div
+        className="sticky top-0 z-10 backdrop-blur-lg border-b border-border safe-top"
+        style={{ background: 'var(--gradient-warm)' }}
+      >
         <div className="container max-w-lg mx-auto px-4 py-3">
           <div className="flex items-center justify-between relative">
             <Button variant="ghost" size="icon" onClick={onHome}>

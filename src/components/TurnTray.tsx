@@ -20,7 +20,7 @@ export const TurnTray = ({
     y: 100
   }} animate={{
     y: 0
-  }} className="fixed bottom-0 left-0 right-0 bg-card/95 backdrop-blur-lg border-t border-border safe-bottom">
+  }} className="fixed bottom-0 left-0 right-0 backdrop-blur-lg border-t border-border safe-bottom" style={{ background: 'var(--gradient-warm)' }}>
       <div className="container max-w-lg mx-auto px-4 py-4">
         <div className="flex items-center gap-3">
           {/* Undo button */}
