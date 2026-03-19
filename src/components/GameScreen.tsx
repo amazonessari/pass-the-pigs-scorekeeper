@@ -84,8 +84,8 @@ export const GameScreen = ({
 
       {/* Score display */}
       <div className="container max-w-lg mx-auto px-4 text-center py-2">
-        <span className="text-lg font-display text-foreground">{currentPlayer.totalScore + turnPoints}</span>
-        <span className="text-lg font-display text-muted-foreground"> / {game.targetScore}</span>
+        <span className="font-display text-foreground" style={{ fontSize: 24 }}>{currentPlayer.totalScore + turnPoints}</span>
+        <span className="font-display text-muted-foreground" style={{ fontSize: 24 }}> / {game.targetScore}</span>
       </div>
 
       {/* Outcome grid */}
