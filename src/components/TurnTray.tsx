@@ -14,9 +14,6 @@ interface TurnTrayProps {
   onUndo: () => void;
 }
 
-// Max height for 2 rows of chips (py-1 + text-sm ≈ 28px per row, gap-2 = 8px between rows)
-const MAX_ROWS_HEIGHT = 28 * 2 + 8;
-
 export const TurnTray = ({ totalScore, canBank, canUndo, events, onBank, onUndo }: TurnTrayProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [startIndex, setStartIndex] = useState(0);
@@ -26,20 +23,31 @@ export const TurnTray = ({ totalScore, canBank, canUndo, events, onBank, onUndo 
     setStartIndex(0);
   }, [events.length]);
 
-  // After render, detect height overflow and hide oldest chips
+  // After render, detect width overflow and hide oldest chips
   useLayoutEffect(() => {
     const container = containerRef.current;
     if (!container || events.length === 0) return;
-    if (container.scrollHeight <= MAX_ROWS_HEIGHT + 2) return; // fits within 2 rows
+    if (container.scrollWidth <= container.clientWidth) return;
 
-    // Too many chips — remove from the front one by one until it fits
     const chips = Array.from(container.querySelectorAll<HTMLElement>('[data-chip]'));
     if (chips.length === 0) return;
 
-    // Find how many chips from the end fit within 2 rows
-    // Binary search: try removing 1, 2, 3... until it fits
-    const currentVisible = events.length - startIndex;
-    setStartIndex(startIndex + Math.ceil(currentVisible * 0.3 || 1));
+    const ELLIPSIS_WIDTH = 28;
+    const containerWidth = container.clientWidth;
+
+    let used = ELLIPSIS_WIDTH;
+    let visible = 0;
+    for (let i = chips.length - 1; i >= 0; i--) {
+      const chipWidth = chips[i].offsetWidth + 8;
+      if (used + chipWidth <= containerWidth) {
+        used += chipWidth;
+        visible++;
+      } else {
+        break;
+      }
+    }
+
+    setStartIndex(events.length - visible);
   }, [events, startIndex]);
 
   const showEllipsis = startIndex > 0;
@@ -60,8 +68,7 @@ export const TurnTray = ({ totalScore, canBank, canUndo, events, onBank, onUndo 
 
           <div
             ref={containerRef}
-            className="flex-1 flex flex-wrap items-center justify-center gap-2 overflow-hidden min-w-0"
-            style={{ maxHeight: MAX_ROWS_HEIGHT }}
+            className="flex-1 flex items-center justify-center gap-2 overflow-hidden min-w-0"
           >
             {showEllipsis && (
               <span className="text-sm text-muted-foreground shrink-0">…</span>
