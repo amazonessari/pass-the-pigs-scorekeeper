@@ -88,7 +88,6 @@ export const GameScreen = ({
       y: 0
     }} className="container max-w-lg mx-auto px-4 py-4">
         <div className="p-4 border-border text-center bg-[#fdfcfc]/0 rounded-none shadow-none border-0">
-          <div className="text-sm text-muted-foreground mb-2">Race to {game.targetScore}</div>
           {game.currentTurn && game.currentTurn.events.length > 0 && <div className="flex flex-wrap justify-center gap-2">
               {game.currentTurn.events.map((event, index) => {
                 // Calculate running total up to this point

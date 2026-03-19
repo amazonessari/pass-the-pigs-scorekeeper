@@ -28,20 +28,6 @@ export const TurnTray = ({
             <Undo2 className="w-6 h-6" />
           </Button>
 
-          {/* Total score display */}
-          <div className="flex-1 text-center">
-            <div className="text-sm font-medium text-secondary-foreground">
-              Total Score
-            </div>
-            <motion.div key={totalScore} initial={{
-            scale: 1.2
-          }} animate={{
-            scale: 1
-          }} className={cn("text-4xl font-display", totalScore > 0 ? "text-primary" : "text-muted-foreground")}>
-              {totalScore}
-            </motion.div>
-          </div>
-
           {/* Bank button */}
           <Button variant="success" size="lg" onClick={onBank} disabled={!canBank} className="shrink-0 px-6">
             <PiggyBank className="w-5 h-5 mr-2" />
