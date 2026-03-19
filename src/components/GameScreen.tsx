@@ -79,6 +79,12 @@ export const GameScreen = ({
         </div>
       </div>
 
+      {/* Score display */}
+      <div className="container max-w-lg mx-auto px-4 text-center py-2">
+        <span className="text-lg font-display text-foreground">{currentPlayer.totalScore + turnPoints}</span>
+        <span className="text-lg font-display text-muted-foreground"> / {game.targetScore}</span>
+      </div>
+
       {/* Outcome grid */}
       <div className="container max-w-lg mx-auto px-4 flex-1">
         <OutcomeGrid onSelect={onRecordOutcome} />
