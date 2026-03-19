@@ -83,7 +83,7 @@ export const TurnTray = ({ totalScore, canBank, canUndo, events, onBank, onUndo 
 
           <Button variant="success" size="lg" onClick={onBank} disabled={!canBank} className="shrink-0 self-center px-6">
             <PiggyBank className="w-5 h-5 mr-2" />
-            Bank
+            Bank {events.reduce((sum, e) => sum + e.points, 0) > 0 && events.reduce((sum, e) => sum + e.points, 0)}
           </Button>
         </div>
       </div>
