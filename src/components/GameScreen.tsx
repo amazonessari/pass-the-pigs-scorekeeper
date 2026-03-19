@@ -62,9 +62,12 @@ export const GameScreen = ({
             <Button variant="ghost" size="icon" onClick={onHome}>
               <Home className="w-5 h-5" />
             </Button>
-            <div className="absolute left-1/2 -translate-x-1/2">
-              <div className="text-sm font-display text-foreground">
-                {currentPlayer.name}'s {getOrdinal(currentTurnNumber)} turn
+            <div className="absolute left-1/2 -translate-x-1/2 text-center">
+              <div className="text-sm font-display text-muted-foreground leading-tight">
+                {getOrdinal(currentTurnNumber)} turn
+              </div>
+              <div className="text-sm font-display text-primary leading-tight">
+                {currentPlayer.name}
               </div>
             </div>
             <div className="flex gap-1">
