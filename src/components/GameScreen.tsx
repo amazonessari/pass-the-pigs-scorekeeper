@@ -79,40 +79,13 @@ export const GameScreen = ({
         </div>
       </div>
 
-      {/* Current turn info */}
-      <motion.div key={currentPlayer.id} initial={{
-      opacity: 0,
-      y: -10
-    }} animate={{
-      opacity: 1,
-      y: 0
-    }} className="container max-w-lg mx-auto px-4 py-4">
-        <div className="p-4 border-border text-center bg-[#fdfcfc]/0 rounded-none shadow-none border-0">
-          {game.currentTurn && game.currentTurn.events.length > 0 && <div className="flex flex-wrap justify-center gap-2">
-              {game.currentTurn.events.map((event, index) => {
-                // Calculate running total up to this point
-                const runningTotal = game.currentTurn!.events.slice(0, index + 1).reduce((sum, e) => sum + e.points, 0);
-                return (
-                  <motion.div key={event.id} initial={{
-                    scale: 0
-                  }} animate={{
-                    scale: 1
-                  }} className={cn("px-3 py-1 rounded-full text-sm font-medium", "bg-primary/10 text-primary")}>
-                    +{event.points} <span className="text-muted-foreground">({runningTotal})</span>
-                  </motion.div>
-                );
-              })}
-            </div>}
-        </div>
-      </motion.div>
-
       {/* Outcome grid */}
       <div className="container max-w-lg mx-auto px-4 flex-1">
         <OutcomeGrid onSelect={onRecordOutcome} />
       </div>
 
       {/* Turn tray */}
-      <TurnTray totalScore={currentPlayer.totalScore + turnPoints} canBank={turnPoints > 0} canUndo={canUndo} onBank={onBank} onUndo={onUndo} />
+      <TurnTray totalScore={currentPlayer.totalScore + turnPoints} canBank={turnPoints > 0} canUndo={canUndo} events={game.currentTurn?.events || []} onBank={onBank} onUndo={onUndo} />
 
       {/* History drawer */}
       <AnimatePresence>
